@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ponto do Churrasco Ouro Preto - Bebidas Geladas & Espetinhos Premium</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts (Inter & Montserrat) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bbq: {
+              DEFAULT: '#7F1D1D', // Vermelho Brasa / Churrasco
+              dark: '#450A0A',
+              darker: '#180303',
+              accent: '#F97316', // Laranja Fogo
+              amber: '#F59E0B',  // Amarelo Cerveja Gelada
+              gold: '#FBBF24',
+              card: '#2A0C0C'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #180303;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #7F1D1D;
+      border-radius: 4px;
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #F97316 0%, #FBBF24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .glass-card {
+      background: rgba(42, 12, 12, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(249, 115, 22, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-bbq-darker text-slate-100 font-sans min-h-screen flex flex-col pb-16 antialiased selection:bg-bbq-accent selection:text-white">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-gradient-to-r from-bbq-dark via-bbq-card to-bbq-dark text-slate-200 text-[11px] sm:text-xs py-2 px-4 border-b border-orange-900/40">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1.5">
+      <div class="flex items-center gap-3">
+        <span class="flex items-center gap-1.5 text-bbq-gold font-bold">
+          <i class="fa-solid fa-location-dot"></i> Rua Vereador Moacir Chaves, 30 - Bauxita, Ouro Preto/MG
+        </span>
+        <span class="hidden sm:inline text-red-900">|</span>
+        <span class="hidden sm:flex items-center gap-1 text-slate-300">
+          <i class="fa-solid fa-beer-mug-empty text-bbq-amber"></i> Bebidas Estupidamente Geladas & Carnes Selecionadas
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="bg-emerald-950/80 px-2.5 py-0.5 rounded-full text-[10px] uppercase font-extrabold text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+          <i class="fa-solid fa-circle-check"></i> Empresa Ativa na Bauxita
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="bg-bbq-dark/90 backdrop-blur-md border-b border-orange-950/60 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 bg-gradient-to-tr from-bbq via-bbq-accent to-bbq-gold rounded-2xl flex items-center justify-center shadow-lg shadow-red-950/80 transform group-hover:rotate-6 transition duration-300">
+          <i class="fa-solid fa-fire-burner text-bbq-darker text-2xl font-black"></i>
+        </div>
+        <div>
+          <span class="font-display text-2xl sm:text-3xl font-black tracking-tight text-white uppercase block leading-none">
+            PONTO DO <span class="text-gradient">CHURRASCO</span>
+          </span>
+          <span class="text-[10px] uppercase tracking-widest text-orange-300 font-bold block mt-0.5">
+            Bauxita • Ouro Preto MG
+          </span>
+        </div>
+      </a>
+
+      <!-- Quick Actions -->
+      <div class="flex items-center gap-3">
+        <button onclick="openCNPJModal()" class="hidden sm:inline-flex items-center gap-1.5 bg-red-950/60 hover:bg-red-900/80 border border-orange-800/50 text-orange-200 text-xs font-bold px-3 py-2 rounded-xl transition">
+          <i class="fa-solid fa-shield-check text-bbq-gold"></i> CNPJ Verificado
+        </button>
+
+        <button onclick="toggleCartModal()" class="relative bg-gradient-to-r from-bbq-accent to-amber-500 hover:opacity-95 text-bbq-darker text-xs font-black px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-lg shadow-orange-950/80 uppercase tracking-wider">
+          <i class="fa-solid fa-basket-shopping text-bbq-darker"></i>
+          <span class="hidden sm:inline">Minha Sacola</span>
+          <span id="header-cart-count" class="bg-bbq-darker text-bbq-gold font-black text-[11px] px-2 py-0.2 rounded-full">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative py-12 px-4 overflow-hidden border-b border-orange-900/30">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
+      
+      <div class="space-y-4 text-center lg:text-left">
+        <span class="inline-flex items-center gap-2 bg-red-950/80 border border-orange-500/40 text-orange-300 text-xs font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-wider backdrop-blur-sm">
+          <i class="fa-solid fa-fire text-bbq-accent"></i> O Ponto Certo no Bairro Bauxita
+        </span>
+        <h1 class="font-display text-3xl sm:text-5xl font-black text-white leading-tight uppercase">
+          Bebidas Trincando & <span class="text-gradient">Espetinhos Premium</span>
+        </h1>
+        <p class="text-slate-300 text-xs sm:text-sm max-w-lg mx-auto lg:mx-0 leading-relaxed">
+          Sua conveniência completa de bebidas em Ouro Preto! Cervejas trincando de geladas, refrigerantes, destilados, carvão e carnes selecionadas para o seu churrasco perfeito.
+        </p>
+
+        <div class="pt-2 flex flex-wrap gap-3 justify-center lg:justify-start">
+          <a href="#bebidas" class="bg-gradient-to-r from-bbq-accent to-amber-500 text-bbq-darker font-black text-xs sm:text-sm px-6 py-3.5 rounded-2xl shadow-xl hover:scale-105 transition transform flex items-center gap-2 uppercase tracking-wider">
+            <i class="fa-solid fa-beer-mug-empty"></i> Ver Bebidas Geladas
+          </a>
+          <button onclick="openCNPJModal()" class="bg-white/5 hover:bg-white/10 text-slate-200 text-xs sm:text-sm font-bold px-5 py-3.5 rounded-2xl border border-white/10 transition flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-bbq-accent"></i> Ficha Cadastral
+          </button>
+        </div>
+      </div>
+
+      <div class="relative flex justify-center">
+        <div class="w-64 h-64 sm:w-80 sm:h-80 bg-gradient-to-tr from-bbq via-bbq-accent to-bbq-amber rounded-full blur-3xl opacity-25 absolute"></div>
+        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" alt="Ponto do Churrasco Bauxita" class="w-72 h-72 sm:w-96 sm:h-96 object-cover rounded-3xl shadow-2xl border-2 border-orange-500/30 transform -rotate-2 hover:rotate-0 transition duration-500 relative z-10">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OFFICIAL CNPJ VERIFICATION SECTION -->
+  <section id="empresa-verificada" class="max-w-6xl mx-auto px-4 my-8">
+    <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+      
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+        <div class="space-y-3">
+          <div class="inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full">
+            <i class="fa-solid fa-badge-check text-emerald-400"></i>
+            Empresa Registrada e Ativa na Receita Federal
+          </div>
+
+          <div>
+            <h3 class="text-2xl sm:text-3xl font-display font-black text-white flex items-center gap-2">
+              Ponto do Churrasco Ouro Preto LTDA
+              <span class="text-emerald-400 text-base" title="CNPJ Ativo"><i class="fa-solid fa-circle-check"></i></span>
+            </h3>
+            <p class="text-xs sm:text-sm text-orange-200 font-medium mt-1">
+              Nome Fantasia: <strong class="text-white">Ponto do Churrasco</strong> | Abertura: <span class="text-bbq-gold font-bold">12/07/2023</span>
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
+            <div class="bg-black/40 p-3 rounded-2xl border border-white/10">
+              <span class="text-orange-300 block text-[10px] uppercase font-bold">CNPJ Oficial</span>
+              <strong class="text-bbq-gold font-mono text-sm">51.395.159/0001-93</strong>
+            </div>
+            <div class="bg-black/40 p-3 rounded-2xl border border-white/10">
+              <span class="text-orange-300 block text-[10px] uppercase font-bold">Atividade Econômica (CNAE)</span>
+              <strong class="text-white text-sm">47.23-7-00 (Varejo de Bebidas)</strong>
+            </div>
+            <div class="bg-black/40 p-3 rounded-2xl border border-white/10">
+              <span class="text-orange-300 block text-[10px] uppercase font-bold">Endereço da Loja</span>
+              <p class="text-slate-200 text-[11px] leading-tight mt-0.5">
+                Rua Vereador Moacir Chaves, 30 - Bauxita, Ouro Preto/MG
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-row lg:flex-col gap-2.5 w-full lg:w-auto shrink-0 border-t lg:border-t-0 lg:border-l border-white/10 pt-4 lg:pt-0 lg:pl-6 justify-end">
+          <button onclick="openCNPJModal()" class="w-full sm:w-auto bg-bbq-accent hover:bg-orange-600 text-bbq-darker font-black text-xs px-5 py-3.5 rounded-2xl transition shadow-lg flex items-center justify-center gap-2 uppercase tracking-wider">
+            <i class="fa-solid fa-file-contract"></i> Ficha Cadastral
+          </button>
+          <a href="https://maps.google.com/?q=Rua+Vereador+Moacir+Chaves,+30+-+Bauxita,+Ouro+Preto+-+MG" target="_blank" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-5 py-3.5 rounded-2xl transition border border-white/15 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-map-location-dot text-bbq-gold"></i> Abrir Google Maps
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MAIN CATALOG -->
+  <main id="bebidas" class="max-w-6xl mx-auto px-4 py-4 flex-grow w-full space-y-12">
+    
+    <!-- CERVEJAS & BEBIDAS GELADAS -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between border-b border-orange-950/60 pb-3">
+        <div>
+          <span class="text-bbq-accent font-extrabold text-xs uppercase tracking-widest">Estupidamente Geladas</span>
+          <h3 class="text-2xl font-display font-black text-white">Cervejas & Bebidas</h3>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="glass-card p-4 rounded-2xl flex flex-col justify-between hover:border-orange-500/50 transition">
+          <div>
+            <div class="h-40 bg-cover bg-center rounded-xl relative mb-3" style="background-image: url('https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=500&q=80');">
+              <span class="absolute top-2 right-2 bg-bbq-gold text-bbq-darker text-[10px] font-black px-2.5 py-0.5 rounded-full">Trincando</span>
+            </div>
+            <h4 class="font-display font-bold text-base text-white">Fardo Cerveja Heineken Long Neck (6 un)</h4>
+            <p class="text-xs text-slate-300 mt-1">Cerveja premium gelada no ponto certo para consumo imediato.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+            <span class="text-base font-black text-bbq-gold">R$ 48,00</span>
+            <button onclick="addToCart('Heineken Long Neck (Fardo 6un)', 48.00)" class="bg-bbq-accent hover:bg-orange-600 text-bbq-darker text-xs font-black px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 uppercase">
+              <i class="fa-solid fa-plus"></i> Pedir
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card p-4 rounded-2xl flex flex-col justify-between hover:border-orange-500/50 transition">
+          <div>
+            <div class="h-40 bg-cover bg-center rounded-xl relative mb-3" style="background-image: url('https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&w=500&q=80');">
+              <span class="absolute top-2 right-2 bg-bbq-gold text-bbq-darker text-[10px] font-black px-2.5 py-0.5 rounded-full">Lata 350ml</span>
+            </div>
+            <h4 class="font-display font-bold text-base text-white">Amstel / Brahma Duplo Malte (Fardo 12un)</h4>
+            <p class="text-xs text-slate-300 mt-1">Ideal para reuniões, churrascos familiares e finais de semana.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+            <span class="text-base font-black text-bbq-gold">R$ 54,00</span>
+            <button onclick="addToCart('Fardo Cerveja Lata 12un', 54.00)" class="bg-bbq-accent hover:bg-orange-600 text-bbq-darker text-xs font-black px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 uppercase">
+              <i class="fa-solid fa-plus"></i> Pedir
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card p-4 rounded-2xl flex flex-col justify-between hover:border-orange-500/50 transition">
+          <div>
+            <div class="h-40 bg-cover bg-center rounded-xl relative mb-3" style="background-image: url('https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=500&q=80');">
+              <span class="absolute top-2 right-2 bg-bbq-gold text-bbq-darker text-[10px] font-black px-2.5 py-0.5 rounded-full">Combo</span>
+            </div>
+            <h4 class="font-display font-bold text-base text-white">Whisky Red Label 1L + 4 Red Bull</h4>
+            <p class="text-xs text-slate-300 mt-1">Combo completo para eventos e momentos especiais.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+            <span class="text-base font-black text-bbq-gold">R$ 139,00</span>
+            <button onclick="addToCart('Combo Red Label + 4 Energeticos', 139.00)" class="bg-bbq-accent hover:bg-orange-600 text-bbq-darker text-xs font-black px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 uppercase">
+              <i class="fa-solid fa-plus"></i> Pedir
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ESPETINHOS & UTILITÁRIOS PARA CHURRASCO -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between border-b border-orange-950/60 pb-3">
+        <div>
+          <span class="text-bbq-amber font-extrabold text-xs uppercase tracking-widest">Para a Sua Grelha</span>
+          <h3 class="text-2xl font-display font-black text-white">Kits & Espetinhos de Churrasco</h3>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <div class="glass-card p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+          <div>
+            <h5 class="font-bold text-sm text-white">Pacote de Espetinhos Prontos (Carne / Picanha 1kg)</h5>
+            <p class="text-xs text-slate-300 mt-0.5">Espetinhos temperados, macios e prontos para assar.</p>
+            <span class="text-sm font-black text-bbq-gold mt-1 block">R$ 49,00</span>
+          </div>
+          <button onclick="addToCart('Espetinhos de Carne 1kg', 49.00)" class="bg-bbq-accent hover:bg-orange-600 text-bbq-darker text-xs font-black px-3 py-2 rounded-xl transition shrink-0 ml-3 uppercase">
+            + Adicionar
+          </button>
+        </div>
+
+        <div class="glass-card p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+          <div>
+            <h5 class="font-bold text-sm text-white">Saco de Carvão Vegetal 3kg + Acendedor</h5>
+            <p class="text-xs text-slate-300 mt-0.5">Carvão de alta durabilidade para manter a brasa acesa.</p>
+            <span class="text-sm font-black text-bbq-gold mt-1 block">R$ 18,00</span>
+          </div>
+          <button onclick="addToCart('Saco de Carvao 3kg', 18.00)" class="bg-bbq-accent hover:bg-orange-600 text-bbq-darker text-xs font-black px-3 py-2 rounded-xl transition shrink-0 ml-3 uppercase">
+            + Adicionar
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-bbq-dark border-t border-orange-950/60 text-slate-300 py-8 px-4 mt-auto">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+      <div>
+        <h4 class="font-display font-extrabold text-white text-lg">Ponto do Churrasco Ouro Preto LTDA</h4>
+        <p class="text-xs text-orange-300 mt-0.5">Rua Vereador Moacir Chaves, Nº 30 - Bauxita, Ouro Preto - MG, CEP 35402-281</p>
+        <p class="text-[11px] text-bbq-gold font-mono mt-1">CNPJ Oficial: 51.395.159/0001-93 (Abertura em 12/07/2023)</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/553198843529" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-3 rounded-xl transition flex items-center gap-2 shadow-lg">
+          <i class="fa-brands fa-whatsapp text-base"></i> (31) 9884-3529
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART MODAL -->
+  <div id="cart-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-bbq-dark border border-orange-900/60 rounded-3xl max-w-md w-full p-6 shadow-2xl relative flex flex-col max-h-[90vh]">
+      <div class="flex justify-between items-center border-b border-orange-900/50 pb-3 mb-4">
+        <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+          <i class="fa-solid fa-basket-shopping text-bbq-gold"></i> Sua Sacola
+        </h3>
+        <button onclick="toggleCartModal()" class="text-slate-400 hover:text-white font-bold p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div id="cart-items-container" class="space-y-3 overflow-y-auto flex-grow pr-1 divide-y divide-orange-900/40">
+      </div>
+
+      <div class="border-t border-orange-900/50 pt-4 mt-4">
+        <div class="flex justify-between items-center text-sm font-bold mb-4">
+          <span class="text-slate-300">Total do Pedido:</span>
+          <span id="cart-total-price" class="text-bbq-gold text-xl font-black">R$ 0,00</span>
+        </div>
+
+        <button onclick="checkoutWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2 uppercase tracking-wider">
+          <i class="fa-brands fa-whatsapp text-base"></i> Pedir pelo WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CNPJ MODAL -->
+  <div id="cnpj-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-bbq-dark border border-orange-900/60 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative">
+      <div class="flex justify-between items-center border-b border-orange-900/50 pb-3 mb-4">
+        <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+          <i class="fa-solid fa-shield-check text-emerald-400"></i> Cartão CNPJ - Receita Federal
+        </h3>
+        <button onclick="openCNPJModal()" class="text-slate-400 hover:text-white font-bold p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <div class="space-y-3 text-xs text-slate-300">
+        <div class="p-3 bg-black/40 rounded-2xl border border-white/10">
+          <span class="block text-[10px] uppercase font-bold text-orange-300">Razão Social</span>
+          <strong class="text-sm text-white font-display">Ponto do Churrasco Ouro Preto LTDA</strong>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-3 bg-black/40 rounded-2xl border border-white/10">
+            <span class="block text-[10px] uppercase text-orange-300">Nome Fantasia</span>
+            <strong class="text-white font-bold">Ponto do Churrasco</strong>
+          </div>
+          <div class="p-3 bg-black/40 rounded-2xl border border-white/10">
+            <span class="block text-[10px] uppercase text-orange-300">CNPJ Ativo</span>
+            <strong class="font-mono text-bbq-gold">51.395.159/0001-93</strong>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-3 bg-black/40 rounded-2xl border border-white/10">
+            <span class="block text-[10px] uppercase text-orange-300">Data de Abertura</span>
+            <strong class="text-white">12/07/2023</strong>
+          </div>
+          <div class="p-3 bg-black/40 rounded-2xl border border-white/10">
+            <span class="block text-[10px] uppercase text-orange-300">Situação Cadastral</span>
+            <strong class="text-emerald-400">ATIVA (Simples Nacional)</strong>
+          </div>
+        </div>
+        <div class="p-3 bg-black/40 rounded-2xl border border-white/10">
+          <span class="block text-[10px] uppercase text-orange-300">Quadro Societário</span>
+          <p class="font-medium text-white mt-0.5">• Maria de Jesus Anunciação (Sócio)</p>
+          <p class="font-medium text-white">• Flávio Leocádio da Anunciação (Sócio-Administrador)</p>
+        </div>
+      </div>
+      <div class="mt-5 text-right">
+        <button onclick="openCNPJModal()" class="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const existing = cart.find(item => item.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      updateCartUI();
+      showToast(`${name} adicionado!`);
+    }
+
+    function updateCartUI() {
+      const countEl = document.getElementById('header-cart-count');
+      const container = document.getElementById('cart-items-container');
+      const totalEl = document.getElementById('cart-total-price');
+
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      countEl.textContent = totalCount;
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p class="text-xs text-slate-400 text-center py-6">Sua sacola está vazia.</p>';
+        totalEl.textContent = 'R$ 0,00';
+        return;
+      }
+
+      let html = '';
+      let totalPrice = 0;
+
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.qty;
+        totalPrice += subtotal;
+
+        html += `
+          <div class="py-3 flex justify-between items-center">
+            <div class="pr-2">
+              <h5 class="text-xs font-bold text-white">${item.name}</h5>
+              <span class="text-[11px] text-orange-300">R$ ${item.price.toFixed(2).replace('.', ',')} un</span>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <div class="flex items-center border border-orange-900 rounded-lg overflow-hidden text-xs">
+                <button onclick="changeQty(${index}, -1)" class="px-2 py-1 bg-white/5 text-white font-bold">-</button>
+                <span class="px-2.5 py-1 font-bold text-white">${item.qty}</span>
+                <button onclick="changeQty(${index}, 1)" class="px-2 py-1 bg-white/5 text-white font-bold">+</button>
+              </div>
+              <span class="text-xs font-black text-bbq-gold w-16 text-right">R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+      totalEl.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+    }
+
+    function changeQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartUI();
+    }
+
+    function toggleCartModal() {
+      document.getElementById('cart-modal').classList.toggle('hidden');
+    }
+
+    function openCNPJModal() {
+      document.getElementById('cnpj-modal').classList.toggle('hidden');
+    }
+
+    function checkoutWhatsApp() {
+      if (cart.length === 0) return alert('Sua sacola está vazia!');
+
+      let message = 'Olá! Gostaria de fazer o seguinte pedido no Ponto do Churrasco (Bauxita/OP):\n\n';
+      let total = 0;
+
+      cart.forEach(item => {
+        const sub = item.price * item.qty;
+        total += sub;
+        message += `▪️ ${item.qty}x ${item.name} - R$ ${sub.toFixed(2).replace('.', ',')}\n`;
+      });
+
+      message += `\n*Total: R$ ${total.toFixed(2).replace('.', ',')}*\n\nEndereço de Entrega / Retirada: `;
+      window.open(`https://wa.me/553198843529?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function showToast(text) {
+      const toast = document.createElement('div');
+      toast.className = 'fixed bottom-5 right-5 bg-bbq-accent text-bbq-darker text-xs font-bold px-4 py-3 rounded-2xl shadow-2xl z-50 flex items-center gap-2 border border-bbq-gold';
+      toast.innerHTML = `<i class="fa-solid fa-circle-check text-bbq-darker"></i> ${text}`;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+  </script>
+</body>
+</html>
